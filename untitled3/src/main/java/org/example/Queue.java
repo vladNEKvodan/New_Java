@@ -1,45 +1,6 @@
 package org.example;
 
 import java.util.*;
-
-public class Queue {
-    public static void main(String[] args){
-        PriorityQueue<Student> priorityQueue = new
-                PriorityQueue<Student>(5, new StudentComparator());
-
-        Student student1 = new Student("Nandini", "Anerov", "Zelenograd", 3.2, 10);
-        Student student2 = new Student("Anmol", "Spronov", "Moscow", 4.0, 15);
-        Student student3 = new Student("Palak", "Svistov", "Rostov", 3.8, 17);
-        priorityQueue.add(student1);
-        priorityQueue.add(student2);
-        priorityQueue.add(student3);
-
-        System.out.println("Список клиентов: ");
-
-        while (!priorityQueue.isEmpty()) {
-            System.out.println(priorityQueue.poll().getName());
-        }
-    }
-}
-
-class StudentComparator implements Comparator<Student>{
-
-    public int compare(Student s1, Student s2) {
-        if (s1.time < s2.time)
-            return -1;
-            else if (s1.time > s2.time)
-            return 1;
-        else if (s1.time == s2.time)
-            if (s1.distance < s2.distance) {
-                return 1;
-            }
-            else if (s1.distance > s2.distance) {
-                return -1;
-            }
-        return 0;
-    }
-}
-
 class Student {
     public String name;
     public String surname;
@@ -60,3 +21,37 @@ class Student {
         return name + " " + city;
     }
 }
+    public class Queue {
+    public static void main(String[] args) {
+        PriorityQueue<Student> priorityQueue = new
+                PriorityQueue<Student>(new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                if (o1.time < o2.time)
+                    return -1;
+                else if (o1.time > o2.time)
+                    return 1;
+                else if (o1.time == o2.time)
+                    if (o1.distance < o2.distance) {
+                        return 1;
+                    } else if (o1.distance > o2.distance) {
+                        return -1;
+                    }
+                return 0;
+            }
+        });
+
+        Student student1 = new Student("Vlad", "Anerov", "Zelenograd", 3.2, 10);
+        Student student2 = new Student("Alexander", "Spronov", "Moscow", 4.0, 11);
+        Student student3 = new Student("Dmitriy", "Svistov", "Rostov", 3.8, 12);
+        priorityQueue.add(student1);
+        priorityQueue.add(student2);
+        priorityQueue.add(student3);
+
+        System.out.println("Список клиентов: ");
+
+        while (!priorityQueue.isEmpty()) {
+            System.out.println(priorityQueue.poll().getName());
+        }
+    }
+    }
