@@ -23,8 +23,7 @@ class Student {
 }
     public class Queue {
     public static void main(String[] args) {
-        PriorityQueue<Student> priorityQueue = new
-                PriorityQueue<Student>(new Comparator<Student>() {
+        PriorityQueue<Student> priorityQueue = new PriorityQueue<Student>(new Comparator<Student>() {
             @Override
             public int compare(Student o1, Student o2) {
                 if (o1.time < o2.time)
